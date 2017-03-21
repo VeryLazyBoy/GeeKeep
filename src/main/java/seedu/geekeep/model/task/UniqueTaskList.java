@@ -146,13 +146,13 @@ public class UniqueTaskList implements Iterable<Task> {
         throw new TaskNotFoundException();
     }
 
-    public void markTaskDone(int index) {
-        Task taskToMark = internalList.get(index);
+    public void markTaskDone(int index) throws TaskNotFoundException {
+        Task taskToMark = getTask(index);
         taskToMark.markDone();
     }
 
-    public void markTaskUndone(int index) {
-        Task taskToMark = internalList.get(index);
+    public void markTaskUndone(int index) throws TaskNotFoundException {
+        Task taskToMark = getTask(index);
         taskToMark.markUndone();
     }
 
