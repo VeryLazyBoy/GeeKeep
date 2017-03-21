@@ -129,7 +129,7 @@ public class UpdateCommand extends Command {
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime,
-                updatedLocation, updatedTags, taskToEdit.isDone(), taskToEdit.getId());
+                updatedLocation, updatedTags);
     }
 
     private final int filteredTaskListIndex;
@@ -161,6 +161,7 @@ public class UpdateCommand extends Command {
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            editedTask.setId(taskToEdit.getId());
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
