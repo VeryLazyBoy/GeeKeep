@@ -129,7 +129,8 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-
+        int tempIndex = internalList.indexOf(taskToUpdate);
+        internalList.set(tempIndex, taskToUpdate);
     }
 
     public Task getTask(int index) throws TaskNotFoundException{
