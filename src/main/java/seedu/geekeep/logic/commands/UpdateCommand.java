@@ -14,6 +14,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -171,6 +172,8 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
+        } catch (TaskNotFoundException e) {
+            throw new CommandException(e.getMessage());
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
