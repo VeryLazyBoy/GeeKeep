@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
-import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
@@ -22,7 +21,7 @@ public class Task implements ReadOnlyTask  {
     private DateTime startDateTime;
     private Location location;
     private boolean isDone;
-    private int id;
+    private int id = 0;;
 
     private UniqueTagList tags;
 
@@ -40,19 +39,15 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags) throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, false, ModelManager.currentIndex);
+        this(title, startDateTime, endDateTime, location, tags, false);
 
     }
+
+
 
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
                         throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, isDone, ModelManager.currentIndex);
-    }
-
-    public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone,
-                int id) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(title);
         if (startDateTime != null) {
             assert endDateTime != null;
@@ -67,10 +62,8 @@ public class Task implements ReadOnlyTask  {
         this.startDateTime = startDateTime;
         this.location = location;
         this.isDone = isDone;
-        this.id = id;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
 
-        ModelManager.currentIndex++;
     }
 
     @Override
