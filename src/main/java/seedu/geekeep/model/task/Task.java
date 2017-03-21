@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask  {
     private DateTime startDateTime;
     private Location location;
     private boolean isDone;
-    private int id = 0;;
+    private int id = -1;
 
     private UniqueTagList tags;
 
@@ -115,6 +115,7 @@ public class Task implements ReadOnlyTask  {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+        this.setId(replacement.getId());
     }
 
     public void setStartDateTime(DateTime startDateTime) {

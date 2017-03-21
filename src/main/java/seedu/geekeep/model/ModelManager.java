@@ -91,7 +91,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException,
+            TaskNotFoundException {
         assert editedTask != null;
 
         pastTaskManagers.add(new TaskManager(taskManager));
