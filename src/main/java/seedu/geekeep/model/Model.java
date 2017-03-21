@@ -8,6 +8,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 public interface Model {
 
@@ -76,9 +77,13 @@ public interface Model {
     /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
 
+
     void undo() throws NothingToUndoException;
 
     void redo() throws NothingToRedoException;
+
+
+    ReadOnlyTask getTaskById(int id) throws TaskNotFoundException;
 
 }
 

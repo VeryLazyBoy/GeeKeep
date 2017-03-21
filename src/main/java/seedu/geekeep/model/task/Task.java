@@ -3,6 +3,8 @@ package seedu.geekeep.model.task;
 import java.util.Objects;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
+import seedu.geekeep.commons.util.CollectionUtil;
+import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
@@ -20,6 +22,7 @@ public class Task implements ReadOnlyTask  {
     private DateTime startDateTime;
     private Location location;
     private boolean isDone;
+    private int id;
 
     private UniqueTagList tags;
 
@@ -28,24 +31,31 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-             source.getEndDateTime(), source.getLocation(), source.getTags());
+             source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
     }
 
     /**
      * Every field must be present and not null.
+     * @throws IllegalValueException
      */
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
-                UniqueTagList tags) throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, false);
+                DateTime endDateTime, Location location, UniqueTagList tags) throws IllegalValueException {
+        this(title, startDateTime, endDateTime, location, tags, false, ModelManager.currentIndex);
+
     }
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
-                UniqueTagList tags, boolean isDone) throws IllegalValueException {
-        assert title != null;
-        if (startDateTime != null && endDateTime == null) {
-            throw new IllegalValueException(MESSAGE_DATETIME_MATCH_CONSTRAINTS);
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
+                        throws IllegalValueException {
+        this(title, startDateTime, endDateTime, location, tags, isDone, ModelManager.currentIndex);
+    }
+
+    public Task(Title title, DateTime startDateTime,
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone,
+                int id) throws IllegalValueException {
+        assert !CollectionUtil.isAnyNull(title);
+        if (startDateTime != null) {
+            assert endDateTime != null;
         }
         if (startDateTime != null && endDateTime != null
                 && startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
@@ -57,7 +67,10 @@ public class Task implements ReadOnlyTask  {
         this.startDateTime = startDateTime;
         this.location = location;
         this.isDone = isDone;
+        this.id = id;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+
+        ModelManager.currentIndex++;
     }
 
     @Override
@@ -169,6 +182,15 @@ public class Task implements ReadOnlyTask  {
 
     public void markUndone () {
         isDone = false;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
