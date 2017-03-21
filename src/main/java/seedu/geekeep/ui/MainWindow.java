@@ -117,7 +117,6 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
 
-        //to-do: correctly display the lists
         eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredEventList());
         floatingTaskListPanel = new TaskListPanel("floatingTask",
                 getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
@@ -211,7 +210,7 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public TaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
 
