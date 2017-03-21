@@ -172,6 +172,8 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
+        } catch (TaskNotFoundException e) {
+            throw new CommandException(e.getMessage());
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
