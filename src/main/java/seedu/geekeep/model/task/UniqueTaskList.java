@@ -129,15 +129,19 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
+
+        // TODO: The code below is just a workaround to notify observers of the updated person.
+        // The right way is to implement observable properties in the Person class.
+        // Then, PersonCard should then bind its text labels to those observable properties.
         int tempIndex = internalList.indexOf(taskToUpdate);
         internalList.set(tempIndex, taskToUpdate);
     }
 
-    public Task getTask(int index) throws TaskNotFoundException{
+    public Task getTask(int index) throws TaskNotFoundException {
         Iterator<Task> ir = internalList.iterator();
         Task task;
 
-        while(ir.hasNext()) {
+        while (ir.hasNext()) {
             task = ir.next();
             if (task.getId() == index) {
                 return task;
