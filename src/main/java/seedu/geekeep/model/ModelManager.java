@@ -97,8 +97,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
+
 //        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskListIndex, editedTask);
+
 
         indicateTaskManagerChanged();
     }
