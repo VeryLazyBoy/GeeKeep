@@ -14,8 +14,8 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertFindResult("find Mark"); // no results
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
 
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
+        //find after adding one result
+        commandBox.runCommand("add FloatingTask");
         assertFindResult("find Meier", td.daniel);
     }
 
