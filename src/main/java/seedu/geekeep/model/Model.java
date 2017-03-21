@@ -59,11 +59,12 @@ public interface Model {
      *             list.
      * @throws IllegalValueException
      *             if the task's startDateTime is not matched with a later endDateTime
+     * @throws TaskNotFoundException
      * @throws IndexOutOfBoundsException
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException, TaskNotFoundException;
 
     /** Mark the specified task as done */
     void markTaskDone(int filteredTaskListIndex);

@@ -214,12 +214,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
      *             list.
+     * @throws TaskNotFoundException
      * @throws CommandException
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException,
+            TaskNotFoundException {
         assert editedReadOnlyTask != null;
 
         Task editedTask;
