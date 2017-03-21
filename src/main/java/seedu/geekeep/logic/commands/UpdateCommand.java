@@ -14,6 +14,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -143,21 +144,20 @@ public class UpdateCommand extends Command {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredTaskListIndex = filteredTaskListIndex;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        ReadOnlyTask taskToEdit;
+        try {
+            taskToEdit = model.getTaskById(filteredTaskListIndex);
+        } catch (TaskNotFoundException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
