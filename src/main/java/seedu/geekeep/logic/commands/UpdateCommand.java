@@ -1,6 +1,5 @@
 package seedu.geekeep.logic.commands;
 
-import java.util.List;
 import java.util.Optional;
 
 import seedu.geekeep.commons.core.Messages;

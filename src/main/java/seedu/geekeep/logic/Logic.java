@@ -19,13 +19,13 @@ public interface Logic {
 
     /** Returns the filtered list of all tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
-    
+
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyTask> getFilteredFloatingTaskList();
-    
+
     /** Returns the filtered list of events */
     ObservableList<ReadOnlyTask> getFilteredEventList();
-    
+
     /** Returns the filtered list of deadlines */
     ObservableList<ReadOnlyTask> getFilteredDeadlineList();
 
