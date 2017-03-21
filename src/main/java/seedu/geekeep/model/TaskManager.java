@@ -217,10 +217,22 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     public void markTaskDone(int index) {
-        tasks.markTaskDone(index);
+        try {
+            Task task = (Task) getTaskById(index);
+            task.markDone();
+        } catch (TaskNotFoundException e) {
+
+        }
+
+
     }
 
     public void markTaskUndone(int index) {
-        tasks.markTaskUndone(index);
+        try {
+            Task task = (Task) getTaskById(index);
+            task.markUndone();
+        } catch (TaskNotFoundException e) {
+
+        }
     }
 }
