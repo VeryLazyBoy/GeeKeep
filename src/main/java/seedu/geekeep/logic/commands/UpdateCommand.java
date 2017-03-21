@@ -129,7 +129,8 @@ public class UpdateCommand extends Command {
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedLocation, updatedTags);
+        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime,
+                updatedLocation, updatedTags, taskToEdit.isDone(), taskToEdit.getId());
     }
 
     private final int filteredTaskListIndex;
