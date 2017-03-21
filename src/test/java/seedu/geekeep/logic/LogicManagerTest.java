@@ -355,7 +355,8 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2",
+        int deleteId = threeTasks.get(1).getId();
+        assertCommandSuccess("delete " + deleteId,
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
