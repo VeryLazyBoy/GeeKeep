@@ -70,9 +70,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public ReadOnlyTask getTaskById(int id) throws TaskNotFoundException {
         Iterator<Task> ir = tasks.iterator();
-        while(ir.hasNext()) {
+        while (ir.hasNext()) {
             Task task = ir.next();
-            if(task.getId() == id) {
+            if (task.getId() == id) {
                 return task;
             }
         }
