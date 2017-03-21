@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -52,6 +53,22 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(toBeCopied);
     }
 
+    /** generate a random 4-digit TaskId */
+    public int getNextId() {
+        Random numberGenerator = new Random();
+        int id = numberGenerator.nextInt(9999);
+
+        Iterator<Task> ir = tasks.iterator();
+        while (ir.hasNext()) {
+            Task task = ir.next();
+            if (task.getId() == id) {
+                return getNextId();
+            }
+        }
+
+        return id;
+    }
+
     //// list overwrite operations
 
     /**
@@ -63,12 +80,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
+        p.setId(getNextId());
         tasks.add(p);
     }
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
+
 
     public ReadOnlyTask getTaskById(int id) throws TaskNotFoundException {
         Iterator<Task> ir = tasks.iterator();
