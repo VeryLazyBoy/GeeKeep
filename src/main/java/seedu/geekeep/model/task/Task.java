@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask  {
     private DateTime startDateTime;
     private Location location;
     private boolean isDone;
-    private int id;
+    private int id = 0;;
 
     private UniqueTagList tags;
 
@@ -46,7 +46,8 @@ public class Task implements ReadOnlyTask  {
 
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
+                        throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(title);
         if (startDateTime != null) {
             assert endDateTime != null;
