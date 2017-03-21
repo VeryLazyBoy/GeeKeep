@@ -33,26 +33,9 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> completedListView;
 
-
-    //TODO only works for v0.2 checks
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder) {
-        super(getFxmlFromType(type));
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    //TODO  only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
         super(getFxmlFromType(type));
         setConnections(allList);
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    //TODO only works for v0.2 checks
-    public TaskListPanel(AnchorPane taskListPlaceholder, String type, ObservableList<ReadOnlyTask>... categories) {
-        super(getFxmlFromType(type));
-        for (ObservableList<ReadOnlyTask> list : categories) {
-            setConnections(list);
-        }
         addToPlaceholder(taskListPlaceholder);
     }
 
@@ -109,14 +92,14 @@ public class TaskListPanel extends UiPart<Region> {
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyTask person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || person == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, task.getId()).getRoot());
             }
         }
     }

@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane floatingTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane eventListPanelPlaceholder;
@@ -118,9 +118,11 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
 
         //to-do: correctly display the lists
-        floatingTaskListPanel = new TaskListPanel("floatingTask", getTaskListPlaceholder());
-        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredTaskList());
-        deadlineListPanel = new TaskListPanel("deadline", getDeadlineListPlaceholder());
+        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredEventList());
+        floatingTaskListPanel = new TaskListPanel("floatingTask",
+                getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
+        deadlineListPanel = new TaskListPanel("deadline",
+                getDeadlineListPlaceholder(), logic.getFilteredDeadlineList());
 
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
@@ -139,8 +141,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    private AnchorPane getFloatingTaskListPlaceholder() {
+        return floatingTaskListPanelPlaceholder;
     }
 
     private AnchorPane getEventListPlaceholder() {
