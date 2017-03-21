@@ -161,6 +161,13 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
+        Task task;
+        for (final ReadOnlyTask readOnlyTask : tasks) {
+            task = (Task) readOnlyTask;
+            if (task.getId() == -1) {
+                task.setId(getNextId());
+            }
+        }
         this.tasks.setTasks(tasks);
     }
 
