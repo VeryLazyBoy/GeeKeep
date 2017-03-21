@@ -3,6 +3,7 @@ package seedu.geekeep.model;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +17,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
@@ -64,6 +66,18 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
+    }
+
+    public ReadOnlyTask getTaskById(int id) throws TaskNotFoundException {
+        Iterator<Task> ir = tasks.iterator();
+        while (ir.hasNext()) {
+            Task task = ir.next();
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+
+        throw new TaskNotFoundException();
     }
 
     @Override

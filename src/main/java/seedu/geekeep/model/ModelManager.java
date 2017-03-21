@@ -20,6 +20,7 @@ import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    public static int currentIndex = 0;
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -36,6 +37,10 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
 
+    }
+
+    public void setCurrentIndex(int newIndex) {
+        currentIndex = newIndex;
     }
 
     public ModelManager() {
@@ -62,6 +67,11 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public ReadOnlyTask getTaskById(int id) throws TaskNotFoundException {
+        return taskManager.getTaskById(id);
     }
 
     @Override
