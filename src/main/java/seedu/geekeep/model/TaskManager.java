@@ -134,7 +134,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         if (tasks.remove(key)) {
             boolean successRemoval = IndexKeeper.removeExistedId(key.getId());
             assert successRemoval == true;
-            System.out.println(IndexKeeper.getExistedIds().size());
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();

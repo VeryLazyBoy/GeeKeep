@@ -81,8 +81,10 @@ public abstract class AddressBookGuiTest {
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
         //TODO shouldn't be there
         TestTask[] testTasks = td.getTypicalPersons();
-        for (int i = 0; i < testTasks.length; i++) {
-            testTasks[i].setId(IndexKeeper.getExistedIds().get(i));
+        if (testTasks.length == IndexKeeper.getExistedIds().size()) {
+            for (int i = 0; i < testTasks.length; i++) {
+                testTasks[i].setId(IndexKeeper.getExistedIds().get(i));
+            }
         }
         FxToolkit.showStage();
         while (!stage.isShowing());

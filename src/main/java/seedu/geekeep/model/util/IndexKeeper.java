@@ -15,7 +15,6 @@ public class IndexKeeper {
     }
 
     public static boolean removeExistedId(Integer id) {
-        System.out.println(IndexKeeper.getExistedIds().size());
         return allIndexes.remove(id);
     }
 
