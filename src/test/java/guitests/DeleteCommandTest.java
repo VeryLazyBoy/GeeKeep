@@ -22,7 +22,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         TestTask personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
         ArrayList<Integer> temp = IndexKeeper.getExistedIds();
-        commandBox.runCommand("delete " + IndexKeeper.getExistedIds().get(targetIndexOneIndexed - 1));
+        commandBox.runCommand("delete " + personToDelete.getId());
 
         //confirm the list now contains all previous persons except the deleted person
         assertTrue(taskListPanel.isListMatching(expectedRemainder));

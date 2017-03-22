@@ -1,5 +1,7 @@
 package seedu.geekeep.testutil;
 
+import java.util.Random;
+
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.task.Task;
@@ -57,7 +59,12 @@ public class TypicalTestPersons {
     }
 
     public TestTask[] getTypicalPersons() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        TestTask[] testTasks = new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        Random r = new Random();
+        for (TestTask test : testTasks) {
+            test.setId(r.nextInt(9999));
+        }
+        return testTasks;
     }
 
     public TaskManager getTypicalTaskManager() {
