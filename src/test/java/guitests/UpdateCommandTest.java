@@ -11,6 +11,7 @@ import seedu.geekeep.logic.commands.UpdateCommand;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.Title;
+import seedu.geekeep.model.util.IndexKeeper;
 import seedu.geekeep.testutil.PersonBuilder;
 import seedu.geekeep.testutil.TestTask;
 
@@ -22,27 +23,28 @@ public class UpdateCommandTest extends AddressBookGuiTest {
     TestTask[] expectedTasksList = td.getTypicalPersons();
 
     /**
-     * Checks whether the edited person has the correct updated details.
-     *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * Checks whether the edited task has the correct updated details.
+     * @param geeKeepIndex index of ordering of the task to edit in the geekeep.
+     *      Must refer to the same task as {@code filteredPersonListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedPerson) {
-        commandBox.runCommand("update " + filteredPersonListIndex + " " + detailsToEdit);
+    private void assertEditSuccess(int geeKeepIndex, String detailsToEdit,
+                                    TestTask editedTask) {
+        commandBox.runCommand("update "
+                                    + IndexKeeper.getExistedIds().get(geeKeepIndex - 1)
+                                    + " "
+                                    + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTitle().fullTitle);
-        assertMatching(editedPerson, editedCard);
+        PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getTitle().fullTitle);
+        assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
-        expectedTasksList[addressBookIndex - 1] = editedPerson;
+        expectedTasksList[geeKeepIndex - 1] = editedTask;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
 
     }
 
@@ -50,7 +52,7 @@ public class UpdateCommandTest extends AddressBookGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
             = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex = 1;
+        int sequenceIndex = 1;
 
         TestTask editedPerson = new PersonBuilder().withName("Bobby")
                 .withEndDateTime("01-05-17 1630")
@@ -58,24 +60,25 @@ public class UpdateCommandTest extends AddressBookGuiTest {
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(sequenceIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int sequenceIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask personToEdit = expectedTasksList[sequenceIndex - 1];
         TestTask editedPerson = new PersonBuilder(personToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(sequenceIndex, detailsToEdit, editedPerson);
     }
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("update 3 Alice Pauline s/01-04-17 1630 e/01-05-17 1630 "
-
+        commandBox.runCommand("update "
+                                + IndexKeeper.getExistedIds().get(2)
+                                + " Alice Pauline s/01-04-17 1630 e/01-05-17 1630 "
                                 + "l/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
@@ -85,13 +88,12 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("find Elle");
 
         String detailsToEdit = "Belle";
-        int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        int sequenceIndex = 5;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask personToEdit = expectedTasksList[sequenceIndex - 1];
         TestTask editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(sequenceIndex, detailsToEdit, editedPerson);
     }
 
     @Test
@@ -130,11 +132,11 @@ public class UpdateCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int sequenceIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask personToEdit = expectedTasksList[sequenceIndex - 1];
         TestTask editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(sequenceIndex, detailsToEdit, editedPerson);
     }
 }

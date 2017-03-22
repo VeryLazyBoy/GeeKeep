@@ -21,6 +21,7 @@ import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.geekeep.model.util.IndexKeeper;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
@@ -65,7 +66,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 return getNextId();
             }
         }
-
+        IndexKeeper.addNewId(id);
         return id;
     }
 
@@ -131,6 +132,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
+            boolean successRemoval = IndexKeeper.removeExistedId(key.getId());
+            assert successRemoval == true;
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
@@ -139,6 +142,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
+        if (newData.getTaskList().isEmpty()) {
+            IndexKeeper.resetIds();
+        }
         try {
 
             setTasks(newData.getTaskList());

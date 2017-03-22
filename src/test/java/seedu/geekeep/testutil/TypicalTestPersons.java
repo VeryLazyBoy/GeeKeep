@@ -4,6 +4,7 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
+import seedu.geekeep.model.util.IndexKeeper;
 
 /**
  *
@@ -62,6 +63,15 @@ public class TypicalTestPersons {
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);
+
+      //TODO shouldn't be there
+        TestTask[] testTasks = getTypicalPersons();
+        if (testTasks.length == IndexKeeper.getExistedIds().size()) {
+            for (int i = 0; i < testTasks.length; i++) {
+                testTasks[i].setId(IndexKeeper.getExistedIds().get(i));
+            }
+        }
+
         return ab;
     }
 }
