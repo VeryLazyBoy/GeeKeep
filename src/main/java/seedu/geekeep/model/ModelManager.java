@@ -189,8 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void markTaskDone(int filteredTaskListIndex) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskDone(taskListIndex);
+        taskManager.markTaskDone(filteredTaskListIndex);
         indicateTaskManagerChanged();
     }
 
@@ -198,8 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void markTaskUndone(int filteredTaskListIndex) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskUndone(taskListIndex);
+        taskManager.markTaskUndone(filteredTaskListIndex);
         indicateTaskManagerChanged();
     }
 
