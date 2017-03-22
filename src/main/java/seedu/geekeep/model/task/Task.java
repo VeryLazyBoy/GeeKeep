@@ -2,67 +2,69 @@ package seedu.geekeep.model.task;
 
 import java.util.Objects;
 
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
-import seedu.geekeep.model.ModelManager;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in the Task Manager. Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask  {
+
+    public static final String MESSAGE_DATETIME_MATCH_CONSTRAINTS =
+            "Starting date and time must be matched with a ending date and time";
+    public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS =
+            "Starting date and time must be earlier than ending date and time";
 
     private Title title;
     private DateTime endDateTime;
     private DateTime startDateTime;
     private Location location;
     private boolean isDone;
-    private int id;
+    private int id = -1;
 
     private UniqueTagList tags;
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-             source.getEndDateTime(), source.getLocation(), source.getTags());
+             source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
+        setId(source.getId());
     }
 
     /**
      * Every field must be present and not null.
+     * @throws IllegalValueException
      */
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags) {
-        this(title, startDateTime, endDateTime, location, tags, false, ModelManager.currentIndex);
+                DateTime endDateTime, Location location, UniqueTagList tags) throws IllegalValueException {
+        this(title, startDateTime, endDateTime, location, tags, false);
 
     }
 
-    public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) {
-        this(title, startDateTime, endDateTime, location, tags, isDone, ModelManager.currentIndex);
-    }
+
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone,
-                int id) {
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
+                        throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(title);
         if (startDateTime != null) {
             assert endDateTime != null;
         }
-        if (startDateTime != null && endDateTime != null) {
-            assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
+        if (startDateTime != null && endDateTime != null
+                && startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
+            throw new IllegalValueException(MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
         }
-
 
         this.title = title;
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
         this.location = location;
         this.isDone = isDone;
-        this.id = id;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
 
-        ModelManager.currentIndex++;
     }
 
     @Override
@@ -114,6 +116,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
+        this.setId(replacement.getId());
     }
 
     public void setStartDateTime(DateTime startDateTime) {

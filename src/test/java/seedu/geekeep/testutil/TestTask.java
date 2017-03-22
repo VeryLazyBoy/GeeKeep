@@ -69,6 +69,10 @@ public class TestTask implements ReadOnlyTask {
         return title;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setEndDateTime(DateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
