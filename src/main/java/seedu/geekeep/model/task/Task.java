@@ -44,9 +44,11 @@ public class Task implements ReadOnlyTask  {
 
     }
 
+
+
     public Task(Title title, DateTime startDateTime,
-            DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone,
-            int id) throws IllegalValueException {
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
+                        throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(title);
         if (startDateTime != null) {
             assert endDateTime != null;
@@ -61,14 +63,7 @@ public class Task implements ReadOnlyTask  {
         this.startDateTime = startDateTime;
         this.location = location;
         this.isDone = isDone;
-        this.id = id;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
-
-    public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone)
-                        throws IllegalValueException {
-        this(title, startDateTime, endDateTime, location, tags, isDone, -1);
 
     }
 
