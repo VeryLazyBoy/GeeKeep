@@ -15,7 +15,6 @@ import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
-import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.commons.util.StringUtil;
@@ -111,12 +110,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe

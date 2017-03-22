@@ -22,7 +22,6 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
-import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.logic.commands.AddCommand;
 import seedu.geekeep.logic.commands.ClearCommand;
@@ -477,12 +476,6 @@ public class LogicManagerTest {
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
-    }
-
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
-        targetedJumpIndex = je.targetIndex;
     }
 
     @Subscribe
