@@ -85,8 +85,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            allListView.scrollTo(index);
-            allListView.getSelectionModel().clearAndSelect(index);
+            currentListView.scrollTo(index);
+            currentListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -103,7 +103,7 @@ public class TaskListPanel extends UiPart<Region> {
             tabPanePlaceHolder.getSelectionModel().select(0);
             break;
         }
-        logger.info("Switched to " + category);
+        logger.info("Switched to " + category + " in " + type);
     }
 
 /*  //TODO scrollTo should works for all the ListView

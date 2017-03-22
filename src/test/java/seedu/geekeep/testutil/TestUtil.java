@@ -37,6 +37,7 @@ import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
+import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.geekeep.storage.XmlSerializableTaskManager;
 
 /**
@@ -356,4 +357,21 @@ public class TestUtil {
         FxToolkit.cleanupStages();
     }
 
+    //TODO not used
+    public static TestTask getTaskById(TestTask[] currentList, int id) throws TaskNotFoundException {
+        boolean isFound = false;
+        TestTask resultTask = null;
+        for (int i = 0; i < currentList.length; i++) {
+            if (currentList[i].getId() == id) {
+                isFound = true;
+                resultTask = currentList[i];
+            }
+        }
+
+        if (!isFound) {
+            throw new TaskNotFoundException();
+        }
+
+        return resultTask;
+    }
 }
