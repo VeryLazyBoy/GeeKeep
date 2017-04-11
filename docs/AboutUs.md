@@ -76,10 +76,3 @@ Code Written: [[functional code](../collated/main/A0139438W.md)][[test code](../
 Code Written: [[functional code](../collated/main/A0121658E.md)][[test code](../collated/test/A0121658E.md)]
 
  -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
