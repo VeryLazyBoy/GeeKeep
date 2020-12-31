@@ -4,8 +4,8 @@ We are CS2103JAN2017-W15-B4 based in the [School of Computing, National Universi
 
 ## Project Team
 
-#### [Liu Ziyang](http://github.com/VeryLazyBoy)
-<img src="images/verylazyboy.png" width="150"><br>
+#### [Frank Liu](http://github.com/VeryLazyBoy)
+<img src="https://i1.hdslb.com/bfs/face/002b6e8823210d1a12392a43be6004fa42f1c286.jpg" width="150"><br>
 Role: Developer <br>
 Components in charge of: [UI](https://github.com/VeryLazyBoy2/GeeKeep/blob/master/docs/UserGuide.md#2-ui)<br>
 Features implemented:
@@ -21,7 +21,7 @@ Other Main Contributions:
 -----
 
 #### [How Si Wei](http://github.com/howsiwei)
-<img src="images/howsiwei.png" width="150"><br>
+<img src="https://i1.hdslb.com/bfs/face/002b6e8823210d1a12392a43be6004fa42f1c286.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Storage,
                   Tests
@@ -37,7 +37,7 @@ Code Written: [[functional code](../collated/main/A0147622H.md)][[test code](../
 -----
 
 #### [Goh Yi Rui](http://github.com/yirui94)
-<img src="images/yirui94.png" width="150"><br>
+<img src="https://i1.hdslb.com/bfs/face/002b6e8823210d1a12392a43be6004fa42f1c286.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Logic
 
@@ -63,7 +63,7 @@ Code Written: [[functional code](../collated/main/A0139438W.md)][[test code](../
 -----
 
 #### [Zhang Hanming](https://github.com/ZhangHanming)
-<img src="images/zhanghanming.png" width="150"><br>
+<img src="https://i1.hdslb.com/bfs/face/002b6e8823210d1a12392a43be6004fa42f1c286.jpg" width="150"><br>
  Role: Developer <br>
  Responsibilities: Model
  
